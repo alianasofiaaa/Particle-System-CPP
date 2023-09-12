@@ -102,6 +102,12 @@ void ofApp::keyPressed(int key){
 			p[i].vel*= 2.0;
 		}
 	}
+
+	if(key == 'a'|| key == 'A'){
+		for (unsigned int i=0;i<p.size();i++){
+			p[i].vel*= 0.5;
+		}
+	}
 }
 
 //--------------------------------------------------------------
