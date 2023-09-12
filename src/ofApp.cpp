@@ -96,6 +96,12 @@ void ofApp::keyPressed(int key){
 	if(key == 's' || key == 'S'){
 		isPaused=!isPaused;
 	}
+
+	if (key == 'd' || key == 'D'){
+		for (unsigned int i=0; i<p.size();i++){
+			p[i].vel*= 2.0;
+		}
+	}
 }
 
 //--------------------------------------------------------------
