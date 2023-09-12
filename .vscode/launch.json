@@ -8,7 +8,7 @@
             "name": "Linux Ubuntu",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/pa1-pa1_aliana_sebastian",
+            "program": "${workspaceFolder}/bin/${workspaceFolderBasename}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -21,25 +21,27 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "build"
         },
         {
             "name": "OSX",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/PA1-ParticleSystem.app/Contents/MacOS/PA0",
+            "program": "${workspaceFolder}/bin/${workspaceFolderBasename}.app/Contents/MacOS/${workspaceFolderBasename}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb"
+            "MIMode": "lldb",
+            "preLaunchTask": "build"
         },
         {
             "name": "Windows",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/PA1-ParticleSystem.exe",
+            "program": "${workspaceFolder}/bin/${workspaceFolderBasename}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -53,7 +55,8 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "build"
         }
     ]
 }
