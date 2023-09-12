@@ -33,15 +33,17 @@ void ofApp::resetParticles(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	for(unsigned int i = 0; i < p.size(); i++){
-		p[i].setMode(currentMode);
-		p[i].update();
-	}
+	if(!isPaused){
+		for(unsigned int i = 0; i < p.size(); i++){
+			p[i].setMode(currentMode);
+			p[i].update();
+		}
 	
-	//lets add a bit of movement to the attract points
-	for(unsigned int i = 0; i < attractPointsWithMovement.size(); i++){
-		attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
-		attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
+		//lets add a bit of movement to the attract points
+		for(unsigned int i = 0; i < attractPointsWithMovement.size(); i++){
+			attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
+			attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
+		}
 	}	
 }
 
@@ -89,6 +91,10 @@ void ofApp::keyPressed(int key){
 		
 	if( key == ' ' ){
 		resetParticles();
+	}
+
+	if(key == 's' || key == 'S'){
+		isPaused=!isPaused;
 	}
 }
 
