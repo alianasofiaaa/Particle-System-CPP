@@ -169,12 +169,16 @@ void Particle::draw(){
         if (mode == PARTICLE_MODE_ATTRACT || mode == PARTICLE_MODE_REPEL || mode == PARTICLE_MODE_NOISE || mode == PARTICLE_MODE_NEAREST_POINTS) {
             if (t_count == 1) {
                 ofSetColor(ofColor(17, 0, 255));
+				ofFill();
             } else if (t_count == 2) {
                 ofSetColor(ofColor(255, 255, 0));
+				ofFill();
             } else if (t_count == 3) {
                 ofSetColor(ofColor(255, 0, 0));
+				ofFill();
             } else if (t_count == 4) {
                 ofSetColor(ofColor(0, 255, 188));
+				ofNoFill();
             } else if (t_count > 4) {
                 t_count = 0;
                 colorchange = false;
@@ -183,12 +187,16 @@ void Particle::draw(){
     } else {
         if (mode == PARTICLE_MODE_ATTRACT) {
             ofSetColor(255, 63, 180);
+			ofFill();
         } else if (mode == PARTICLE_MODE_REPEL) {
             ofSetColor(208, 255, 63);
+			ofFill();
         } else if (mode == PARTICLE_MODE_NOISE) {
             ofSetColor(99, 63, 255);
+			ofFill();
         } else if (mode == PARTICLE_MODE_NEAREST_POINTS) {
             ofSetColor(103, 160, 237);
+			ofFill();
         }
     }
 
