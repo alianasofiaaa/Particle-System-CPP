@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "Particle.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -106,6 +107,13 @@ void ofApp::keyPressed(int key){
 	if(key == 'a'|| key == 'A'){
 		for (unsigned int i=0;i<p.size();i++){
 			p[i].vel*= 0.5;
+		}
+	}
+
+	if (key == 't' || key == 'T'){
+		for(unsigned int i=0;i<p.size();i++){
+			p[i].colorchange=true;
+			p[i].t_count+=1;
 		}
 	}
 }

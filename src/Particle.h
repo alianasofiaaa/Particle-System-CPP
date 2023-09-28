@@ -19,8 +19,12 @@ class Particle{
 		void repelFromPoint(int, int);
 		void reset();
 		void update();
-		void draw();		
-		
+		void draw();	
+
+		bool colorchange=false;
+		int t_count=0;
+
+
 		glm::vec3 pos;
 		glm::vec3 vel;
 		glm::vec3 frc;

@@ -165,19 +165,33 @@ void Particle::update(){
 //------------------------------------------------------------------
 void Particle::draw(){
 
-	if( mode == PARTICLE_MODE_ATTRACT ){
-		ofSetColor(255, 63, 180);
-	}
-	else if( mode == PARTICLE_MODE_REPEL ){
-		ofSetColor(208, 255, 63);
-	}
-	else if( mode == PARTICLE_MODE_NOISE ){
-		ofSetColor(99, 63, 255);
-	}
-	else if( mode == PARTICLE_MODE_NEAREST_POINTS ){
-		ofSetColor(103, 160, 237);
-	}
-			
+	 if (colorchange) {
+        if (mode == PARTICLE_MODE_ATTRACT || mode == PARTICLE_MODE_REPEL || mode == PARTICLE_MODE_NOISE || mode == PARTICLE_MODE_NEAREST_POINTS) {
+            if (t_count == 1) {
+                ofSetColor(ofColor(17, 0, 255));
+            } else if (t_count == 2) {
+                ofSetColor(ofColor(255, 255, 0));
+            } else if (t_count == 3) {
+                ofSetColor(ofColor(255, 0, 0));
+            } else if (t_count == 4) {
+                ofSetColor(ofColor(0, 255, 188));
+            } else if (t_count > 4) {
+                t_count = 0;
+                colorchange = false;
+            }
+        }
+    } else {
+        if (mode == PARTICLE_MODE_ATTRACT) {
+            ofSetColor(255, 63, 180);
+        } else if (mode == PARTICLE_MODE_REPEL) {
+            ofSetColor(208, 255, 63);
+        } else if (mode == PARTICLE_MODE_NOISE) {
+            ofSetColor(99, 63, 255);
+        } else if (mode == PARTICLE_MODE_NEAREST_POINTS) {
+            ofSetColor(103, 160, 237);
+        }
+    }
+
 	ofDrawCircle(pos.x, pos.y, scale * 4.0);
 }
 
