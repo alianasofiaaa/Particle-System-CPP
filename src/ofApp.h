@@ -23,10 +23,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		bool isPaused=false;
+
+		bool isRecording=false;
 		
 		particleMode currentMode;
 		string currentModeStr; 
 
+		vector<char> keys;
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;
 		vector <glm::vec3> attractPointsWithMovement;

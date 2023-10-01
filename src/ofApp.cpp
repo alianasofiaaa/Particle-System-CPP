@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "Particle.h"
 
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetVerticalSync(true);
@@ -66,8 +67,13 @@ void ofApp::draw(){
 		}
 	}
 
-	ofSetColor(230);	
+	ofSetColor(255,0,255);	
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+
+	if(isRecording==true){
+		ofSetColor(153,255,255);
+		ofDrawBitmapString("Is recording...",100,120);
+	}
 }
 
 //--------------------------------------------------------------
@@ -115,6 +121,17 @@ void ofApp::keyPressed(int key){
 			p[i].colorchange=true;
 			p[i].t_count+=1;
 		}
+	}
+
+	if(key=='r' || key=='R'){
+		if(isRecording==false){
+			isRecording=true;
+			keys.clear();
+		}
+		else{isRecording=false;}
+	}
+	if(isRecording==true){
+		keys.push_back(key);
 	}
 }
 
