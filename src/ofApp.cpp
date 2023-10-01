@@ -46,6 +46,61 @@ void ofApp::update(){
 			attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
 			attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
 		}
+
+		if(isReplaying==true && fpscounter<=61){
+			fpscounter++;
+			if(keys[index]=='1'){
+				currentMode = PARTICLE_MODE_ATTRACT;
+				currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
+			}
+			if(keys[index]=='2'){
+				currentMode = PARTICLE_MODE_REPEL;
+				currentModeStr = "2 - PARTICLE_MODE_REPEL: repels to mouse";
+			}
+			if(keys[index]=='3'){
+				currentMode = PARTICLE_MODE_NEAREST_POINTS;
+				currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS: attracts to nearest points";
+			}
+			if(keys[index]=='4'){
+				currentMode = PARTICLE_MODE_NOISE;
+				currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation";
+				resetParticles();
+			}
+			if( keys[index] == ' ' && fpscounter==1 ){
+				resetParticles();
+			}
+
+			if(keys[index] == 's' && fpscounter==1){
+				isPaused=!isPaused;
+			}
+
+			if (keys[index] == 'd' && fpscounter==1){
+				for (unsigned int i=0; i<p.size();i++){
+					p[i].vel*= 2.0;
+				}
+			}
+
+			if(keys[index] == 'a' && fpscounter==1){
+				for (unsigned int i=0;i<p.size();i++){
+					p[i].vel*= 0.5;
+				}
+			}
+
+			if (keys[index] == 't' && fpscounter==1){
+				for(unsigned int i=0;i<p.size();i++){
+					p[i].colorchange=true;
+					p[i].t_count+=1;
+				}
+			}
+			if(fpscounter==60){
+				index++;
+				fpscounter=0;
+			}
+			if(index==keys.size()){
+				isReplaying=false;
+				index=0;
+			}
+		}
 	}	
 }
 
@@ -67,71 +122,87 @@ void ofApp::draw(){
 		}
 	}
 
-	ofSetColor(255,0,255);	
+	ofSetColor(230);	
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
 
 	if(isRecording==true){
-		ofSetColor(153,255,255);
-		ofDrawBitmapString("Is recording...",100,120);
+		ofSetColor(255,0,0);
+		ofDrawBitmapString("Is recording...",40,100);
+	}
+	if(isReplaying==true){
+		ofSetColor(0,255,0);
+		if (index < keys.size()) {
+            string keyString = "Replaying: " + ofToString(keys[index]);
+            ofDrawBitmapString(keyString, 40, 100);
+        }
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if( key == '1'){
-		currentMode = PARTICLE_MODE_ATTRACT;
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 		
-	}
-	if( key == '2'){
-		currentMode = PARTICLE_MODE_REPEL;
-		currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse"; 				
-	}
-	if( key == '3'){
-		currentMode = PARTICLE_MODE_NEAREST_POINTS;
-		currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS: hold 'f' to disable force"; 						
-	}
-	if( key == '4'){
-		currentMode = PARTICLE_MODE_NOISE;
-		currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation"; 						
-		resetParticles();
-	}	
+	if(!isReplaying){
+		if( key == '1'){
+			currentMode = PARTICLE_MODE_ATTRACT;
+			currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 		
+		}
+		if( key == '2'){
+			currentMode = PARTICLE_MODE_REPEL;
+			currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse"; 				
+		}
+		if( key == '3'){
+			currentMode = PARTICLE_MODE_NEAREST_POINTS;
+			currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS: attracts to nearest points"; 						
+		}
+		if( key == '4'){
+			currentMode = PARTICLE_MODE_NOISE;
+			currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation"; 						
+			resetParticles();
+		}	
 		
-	if( key == ' ' ){
-		resetParticles();
-	}
+		if( key == ' ' ){
+			resetParticles();
+		}
 
-	if(key == 's' || key == 'S'){
-		isPaused=!isPaused;
-	}
+		if(key == 's'){
+			isPaused=!isPaused;
+		}
 
-	if (key == 'd' || key == 'D'){
-		for (unsigned int i=0; i<p.size();i++){
-			p[i].vel*= 2.0;
+		if (key == 'd'){
+			for (unsigned int i=0; i<p.size();i++){
+				p[i].vel*= 2.0;
+			}
+		}
+
+		if(key == 'a'){
+			for (unsigned int i=0;i<p.size();i++){
+				p[i].vel*= 0.5;
+			}
+		}
+
+		if (key == 't'){
+			for(unsigned int i=0;i<p.size();i++){
+				p[i].colorchange=true;
+				p[i].t_count+=1;
+			}
+		}
+
+		if(key=='r'){
+			if(isRecording==false){
+				isRecording=true;
+				keys.clear();
+			}
+			else{isRecording=false;}
+		}
+		if(isRecording==true && key != 'p'){
+			keys.push_back(key);
+		}
+		if(key == 'p' && !isRecording && !keys.empty()){
+			isReplaying=true;
 		}
 	}
-
-	if(key == 'a'|| key == 'A'){
-		for (unsigned int i=0;i<p.size();i++){
-			p[i].vel*= 0.5;
-		}
-	}
-
-	if (key == 't' || key == 'T'){
-		for(unsigned int i=0;i<p.size();i++){
-			p[i].colorchange=true;
-			p[i].t_count+=1;
-		}
-	}
-
-	if(key=='r' || key=='R'){
-		if(isRecording==false){
-			isRecording=true;
-			keys.clear();
-		}
-		else{isRecording=false;}
-	}
-	if(isRecording==true){
-		keys.push_back(key);
+	if(key =='c'){
+		isReplaying=false;
+		index=0;
 	}
 }
 

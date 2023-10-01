@@ -25,6 +25,10 @@ class ofApp : public ofBaseApp{
 		bool isPaused=false;
 
 		bool isRecording=false;
+		bool isReplaying=false;
+		unsigned int index=0;
+		int fpscounter=0;
+		
 		
 		particleMode currentMode;
 		string currentModeStr; 
