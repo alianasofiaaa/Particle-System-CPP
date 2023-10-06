@@ -34,6 +34,7 @@ class Particle{
 		float scale;
 		
 		particleMode mode;
-		
+		ofRectangle new_rect = ofRectangle(0,0,0,0);
+		ofColor color;
 		vector <glm::vec3> * attractPoints; 
 };

@@ -28,11 +28,16 @@ class ofApp : public ofBaseApp{
 		bool isReplaying=false;
 		unsigned int index=0;
 		int fpscounter=0;
-		
+		// variable for rectangle
+		ofRectangle rect;
+		int x1;
+		int y1;
+		int x2;
+		int y2;
 		
 		particleMode currentMode;
 		string currentModeStr; 
-
+		int colorCounter = 0;
 		vector<char> keys;
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;

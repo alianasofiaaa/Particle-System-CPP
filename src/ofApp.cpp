@@ -39,6 +39,7 @@ void ofApp::update(){
 		for(unsigned int i = 0; i < p.size(); i++){
 			p[i].setMode(currentMode);
 			p[i].update();
+			p[i].new_rect = rect;
 		}
 	
 		//lets add a bit of movement to the attract points
@@ -111,6 +112,9 @@ void ofApp::draw(){
 	for(unsigned int i = 0; i < p.size(); i++){
 		p[i].draw();
 	}
+	ofSetColor(ofColor::yellow);
+	ofNoFill();
+	ofDrawRectangle(rect);
 	
 	ofSetColor(190);
 	if( currentMode == PARTICLE_MODE_NEAREST_POINTS ){
@@ -200,10 +204,11 @@ void ofApp::keyPressed(int key){
 			isReplaying=true;
 		}
 	}
-	if(key =='c'){
-		isReplaying=false;
-		index=0;
+		if(key =='c'){
+			isReplaying=false;
+					index=0;
 	}
+	
 }
 
 //--------------------------------------------------------------
@@ -223,12 +228,22 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+if (button == 0){
+	x1 = x;
+	y1 = y;
+}
+else if (button == 2 && rect.inside(x,y)){
+	rect = ofRectangle(0, 0, 0, 0);
+}
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+if (button == 0){
+	x2 = x;
+	y2 = y;
+	rect = ofRectangle(x1,y1, x2-x1, y2-y1);
+}
 }
 
 //--------------------------------------------------------------
