@@ -197,13 +197,15 @@ void Particle::draw(){
         } else if (mode == PARTICLE_MODE_NEAREST_POINTS) {
             ofSetColor(103, 160, 237);
 		}
-			ofSetColor(color);
+		
+			
 			if(new_rect.inside(pos.x, pos.y)){
 				ofDrawCircle(pos.x, pos.y, scale * 12.0);
 			}
-			else{
+		
+			
 				ofDrawCircle(pos.x, pos.y, scale * 4.0);
-				}
+				
         }
     }
 

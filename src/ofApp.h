@@ -37,7 +37,6 @@ class ofApp : public ofBaseApp{
 		
 		particleMode currentMode;
 		string currentModeStr; 
-		int colorCounter = 0;
 		vector<char> keys;
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;
