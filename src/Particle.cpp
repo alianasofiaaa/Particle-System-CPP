@@ -165,7 +165,7 @@ void Particle::update(){
 //------------------------------------------------------------------
 void Particle::draw(){
 
-	 if (colorchange) {
+	if (colorchange) {
         if (mode == PARTICLE_MODE_ATTRACT || mode == PARTICLE_MODE_REPEL || mode == PARTICLE_MODE_NOISE || mode == PARTICLE_MODE_NEAREST_POINTS) {
             if (t_count == 1) {
                 ofSetColor(ofColor(17, 0, 255));
@@ -198,17 +198,12 @@ void Particle::draw(){
             ofSetColor(103, 160, 237);
 		}
 		
-			
-			if(new_rect.inside(pos.x, pos.y)){
-				ofDrawCircle(pos.x, pos.y, scale * 12.0);
-			}
-		
-			
-				ofDrawCircle(pos.x, pos.y, scale * 4.0);
-				
-        }
+	}		
+	if(new_rect.inside(pos.x, pos.y)){
+		ofDrawCircle(pos.x, pos.y, scale * 12.0);
     }
-
+	ofDrawCircle(pos.x, pos.y, scale * 4.0);
+}
 	
 
 
