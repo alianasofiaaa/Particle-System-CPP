@@ -26,3 +26,5 @@ If a partner has no commits in the repositories, he will receive a 0
 
 ## Student Notes
 If you have any notes to add for your TA about the project specs or creative additions, you may do so in this section of the README
+Aliana S. Santiago Morales--> Phase 1 and Phase 3
+Sebastian A. Santiago Perez--> Phase 2, helped with Phase 3 and realesed the project
